@@ -1,0 +1,2 @@
+const ICONS = ['📁', '🔬', '✈️', '💻', '🎨', '📚', '🎯', '🛠️', '🌐', '📊', '🎵', '🏠', '💼', '🔗', '⚡', '🧪'];
+const TICO = { ok: 'fa-circle-check', err: 'fa-circle-xmark', warn: 'fa-triangle-exclamation', info: 'fa-circle-info' };
