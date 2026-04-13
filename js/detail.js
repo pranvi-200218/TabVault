@@ -12,8 +12,10 @@ function openDetail(id, bucket) {
     document.getElementById('dp').classList.add('open');
 }
 
-function closeDetail() { document.getElementById('dp').classList.remove('open');
-    activeDpId = null; }
+function closeDetail() {
+    document.getElementById('dp').classList.remove('open');
+    activeDpId = null;
+}
 document.getElementById('dp').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetail(); });
 
 function refreshDpMeta(s) {
@@ -57,8 +59,10 @@ function renderDpTabs(sid, g) {
     if (!g.tabs.length) return '<div style="padding:10px 13px;font-size:11px;color:var(--text3)">No tabs in this group</div>';
     if (!g.subgrouped) return g.tabs.map(t => dpTabRow(sid, g.id, t)).join('');
     const byDomain = {};
-    g.tabs.forEach(t => { const d = domain(t.url);
-        (byDomain[d] || (byDomain[d] = [])).push(t); });
+    g.tabs.forEach(t => {
+        const d = domain(t.url);
+        (byDomain[d] || (byDomain[d] = [])).push(t);
+    });
     return Object.entries(byDomain).map(([d, tabs]) =>
         `<div class="dp-subgrp-hd"><i class="fa-solid fa-globe"></i>${esc(d)}</div>${tabs.map(t => dpTabRow(sid, g.id, t)).join('')}`
     ).join('');
@@ -117,7 +121,7 @@ function addGroupToCurrentDetail() {
     document.getElementById('modal-t').textContent = 'Add Group';
     document.getElementById('modal-d').textContent = 'Add a new tab group to the current session.';
     document.getElementById('modal-save-lbl').textContent = 'Add Group';
-    document.getElementById('m-name').value = DB.sessions[activeDpId] ? .name || '';
+    document.getElementById('m-name').value = DB.sessions[activeDpId] ?.name || '';
     document.getElementById('m-name').disabled = true;
     document.getElementById('m-grp').value = '';
     document.getElementById('m-urls').value = '';

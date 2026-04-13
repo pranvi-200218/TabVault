@@ -4,7 +4,7 @@ function renderAll() {
 }
 
 function renderLibrary() {
-    const q = (document.getElementById('lib-search') ? .value || '').toLowerCase();
+    const q = (document.getElementById('lib-search')?.value || '').toLowerCase();
     const sess = sortedArr(DB.sessions).filter(s => !q || s.name.toLowerCase().includes(q));
     const all = Object.keys(DB.sessions).length;
     const cnt = document.getElementById('ph-count');
@@ -14,7 +14,7 @@ function renderLibrary() {
 }
 
 function renderArchived() {
-    const q = (document.getElementById('arc-search') ? .value || '').toLowerCase();
+    const q = (document.getElementById('arc-search')?.value || '').toLowerCase();
     const sess = sortedArr(DB.archived).filter(s => !q || s.name.toLowerCase().includes(q));
     const cnt = document.getElementById('arc-count');
     if (cnt) cnt.textContent = `${Object.keys(DB.archived).length} archived`;
@@ -25,7 +25,7 @@ function renderArchived() {
 }
 
 function renderTrash() {
-    const q = (document.getElementById('trs-search') ? .value || '').toLowerCase();
+    const q = (document.getElementById('trs-search')?.value || '').toLowerCase();
     const sess = sortedArr(DB.trash).filter(s => !q || s.name.toLowerCase().includes(q));
     const cnt = document.getElementById('trs-count');
     if (cnt) cnt.textContent = `${Object.keys(DB.trash).length} deleted`;

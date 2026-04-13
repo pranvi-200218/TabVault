@@ -19,8 +19,8 @@ function launch() {
 function goHome() {
     document.getElementById('app').classList.remove('show');
     const l = document.getElementById('landing');
-    l.style.display = 'flex';
-    setTimeout(() => l.classList.remove('out'), 20);
+    l.style.display = '';
+    l.classList.remove('out');
 }
 
 function toggleTheme() {
@@ -41,7 +41,7 @@ function switchView(v, btn) {
     document.querySelectorAll('.top-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
-    document.getElementById('view-' + v) ? .classList.add('active');
+    document.getElementById('view-' + v)?.classList.add('active');
     if (v === 'workspaces') renderWorkspaces();
     if (v === 'library') renderLibrary();
 }
