@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TabVault — Session Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Fira+Code:wght@300;400;500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style1.css" />
+</head>
+
+<body id="body">
+
+    <!-- ═══ LANDING ═══ -->
+    <div id="landing">
+        <div class="land-logo">
+            <span class="land-logo-icon"><i class="fa-solid fa-vault" style="color:#0ea5a0"></i></span> TabVault
+        </div>
+        <div class="land-sub">Your browser sessions, beautifully organized.</div>
+        <div class="land-badge">
+            <span class="land-feature"><i class="fa-solid fa-bolt" style="color:#f59e0b"></i> Instant restore</span>
+            <span class="land-feature"><i class="fa-solid fa-layer-group" style="color:#0ea5a0"></i> Tab groups</span>
+            <span class="land-feature"><i class="fa-solid fa-shield-halved" style="color:#10b981"></i> Local only</span>
+        </div>
+        <button class="btn btn-p land-btn" onclick="launch()">
+    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+    Open Vault
+  </button>
+        <div style="margin-top:28px;font-family:var(--font-mono);font-size:10px;letter-spacing:1px;color:var(--text4);animation:fadeSlideUp 0.7s 0.45s cubic-bezier(0.4,0,0.2,1) both">
+            v5 · LOCAL STORAGE · NO ACCOUNT NEEDED
+        </div>
+    </div>
+
+    <!-- ═══ APP ═══ -->
+    <div id="app">
+
+        <!-- TOP BAR -->
+        <div class="top-bar">
+            <span class="top-logo" onclick="goHome()">
+      <span class="top-logo-icon"><i class="fa-solid fa-vault"></i></span> TabVault
+            </span>
+            <div class="top-divider"></div>
+
+            <div class="top-tabs">
+                <button class="top-tab active" data-view="library" onclick="switchView('library', this)">
+        <i class="fa-solid fa-bookmark" style="margin-right:5px;font-size:11px"></i>Library
+      </button>
+                <button class="top-tab" data-view="workspaces" onclick="switchView('workspaces', this)">
+        <i class="fa-solid fa-layer-group" style="margin-right:5px;font-size:11px"></i>Workspaces
+      </button>
+            </div>
+
+            <div class="top-spacer"></div>
+
+            <div class="top-actions">
+                <button class="icon-btn" onclick="zoomOut()" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
+                <button class="icon-btn" onclick="zoomIn()" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
+                <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
+                <button class="btn btn-p" onclick="openAddModal()" style="padding:7px 16px;font-size:13px">
+        <i class="fa-solid fa-plus"></i> New Session
+      </button>
+            </div>
+        </div>
+
+        <!-- APP BODY -->
+        <div class="app-body">
+
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <div class="sb-section">
+                    <div class="sb-label">Navigation</div>
+                    <div class="sb-item active" onclick="showSbSection('library')">
+                        <i class="fa-solid fa-bookmark"></i> Library
+                        <span class="sb-badge" id="sb-lib-cnt">0</span>
+                    </div>
+                    <div class="sb-item" onclick="showSbSection('archived')">
+                        <i class="fa-solid fa-box-archive"></i> Archived
+                        <span class="sb-badge" id="sb-arc-cnt">0</span>
+                    </div>
+                    <div class="sb-item" onclick="showSbSection('trash')">
+                        <i class="fa-solid fa-trash"></i> Trash
+                        <span class="sb-badge" id="sb-trs-cnt">0</span>
+                    </div>
+                </div>
+
+                <div class="sb-sep"></div>
+
+                <div class="sb-section">
+                    <div class="sb-label">Recent Sessions</div>
+                </div>
+                <div class="sb-recent-list" id="sb-recent"></div>
+
+                <div class="sb-sync" id="sb-sync">–</div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+            <main class="main-content">
+
+                <!-- LIBRARY VIEW -->
+                <div class="view active" id="view-library">
+                    <div class="view-header">
+                        <div>
+                            <div class="view-title">Library</div>
+                        </div>
+                        <span class="view-count" id="ph-count">0 sessions saved locally</span>
+                        <div class="view-spacer"></div>
+                        <div class="search-wrap">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input class="search-input" id="lib-search" type="text" placeholder="Search sessions…" oninput="renderLibrary()" />
+                        </div>
+                    </div>
+                    <div class="lib-toolbar">
+                        <button class="btn-sort" onclick="toggleSort()">
+            <i class="fa-solid fa-arrow-down-wide-short"></i>
+            <span id="sort-lbl">Recent</span>
+          </button>
+                    </div>
+                    <div class="lib-grid" id="lib-grid"></div>
+                </div>
+
+                <!-- WORKSPACES VIEW -->
+                <div class="view" id="view-workspaces">
+                    <div class="view-header">
+                        <div class="view-title">Workspaces</div>
+                        <div class="view-spacer"></div>
+                        <button class="btn btn-p" onclick="openAddModal()" style="padding:7px 16px;font-size:13px">
+            <i class="fa-solid fa-plus"></i> New
+          </button>
+                    </div>
+                    <div class="lib-grid" id="ws-grid"></div>
+                </div>
+
+                <!-- ARCHIVED VIEW -->
+                <div class="view" id="view-archived">
+                    <div class="view-header">
+                        <div>
+                            <div class="view-title">Archived</div>
+                        </div>
+                        <span class="view-count" id="arc-count">0 archived</span>
+                        <div class="view-spacer"></div>
+                        <div class="search-wrap">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input class="search-input" id="arc-search" type="text" placeholder="Search…" oninput="renderArchived()" />
+                        </div>
+                    </div>
+                    <div class="lib-grid" id="arc-grid"></div>
+                </div>
+
+                <!-- TRASH VIEW -->
+                <div class="view" id="view-trash">
+                    <div class="view-header">
+                        <div>
+                            <div class="view-title">Trash</div>
+                        </div>
+                        <span class="view-count" id="trs-count">0 deleted</span>
+                        <div class="view-spacer"></div>
+                        <div class="search-wrap">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input class="search-input" id="trs-search" type="text" placeholder="Search…" oninput="renderTrash()" />
+                        </div>
+                    </div>
+                    <div class="danger-bar">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>Items in trash are not backed up. Empty trash to free storage.</span>
+                        <button class="btn btn-d" style="padding:6px 14px;font-size:12px" onclick="emptyTrash()">
+            <i class="fa-solid fa-trash"></i> Empty Trash
+          </button>
+                    </div>
+                    <div class="lib-grid" id="trs-grid"></div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- ═══ DETAIL PANEL ═══ -->
+    <div class="detail-panel" id="dp">
+        <div class="dp-header">
+            <div class="dp-header-top">
+                <span id="dp-icon">📁</span>
+                <div class="dp-title-wrap">
+                    <div id="dp-name">Session Name</div>
+                    <div id="dp-meta"></div>
+                </div>
+                <button class="dp-close" onclick="closeDetail()" title="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+            </div>
+            <div class="dp-header-acts">
+                <button class="btn btn-s" style="padding:6px 14px;font-size:12px" onclick="addGroupToCurrentDetail()">
+        <i class="fa-solid fa-plus"></i> Add Group
+      </button>
+                <button class="btn btn-p" style="padding:6px 14px;font-size:12px" onclick="openAllTabs(activeDpId, detailBucket)">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Restore All
+      </button>
+            </div>
+        </div>
+        <div id="dp-body"></div>
+    </div>
+
+    <!-- ═══ ADD / EDIT MODAL ═══ -->
+    <div class="modal-backdrop" id="add-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-icon"><i class="fa-solid fa-bookmark"></i></div>
+                <div class="modal-title-wrap">
+                    <div class="modal-title" id="modal-t">Save New Session</div>
+                    <div class="modal-desc" id="modal-d">Add URLs below to save into this session.</div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label class="field-label">Session Name</label>
+                    <input class="field-input" id="m-name" type="text" placeholder="e.g. Research, Work, Travel…" />
+                </div>
+                <div>
+                    <label class="field-label">Pick Icon</label>
+                    <div class="icon-row-wrap" id="icon-row"></div>
+                </div>
+                <div>
+                    <label class="field-label">Group Name</label>
+                    <input class="field-input" id="m-grp" type="text" placeholder="General, Work, Personal…" />
+                </div>
+                <div>
+                    <label class="field-label">URLs (one per line)</label>
+                    <textarea class="field-input field-textarea" id="m-urls" placeholder="https://github.com&#10;https://notion.so&#10;https://figma.com"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-s" onclick="closeAddModal()">Cancel</button>
+                <button class="btn btn-p" onclick="saveSessionModal()">
+        <i class="fa-solid fa-floppy-disk"></i>
+        <span id="modal-save-lbl">Save Session</span>
+      </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ DUPLICATE MODAL ═══ -->
+    <div class="modal-backdrop" id="dup-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.25);color:var(--warn)">
+                    <i class="fa-solid fa-copy"></i>
+                </div>
+                <div class="modal-title-wrap">
+                    <div class="modal-title" id="dup-t">Duplicate found</div>
+                    <div class="modal-desc" id="dup-d">Choose how to handle it:</div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="dup-opts" id="dup-opts"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-s" onclick="closeDupModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ CONFIRM MODAL ═══ -->
+    <div class="modal-backdrop" id="conf-modal">
+        <div class="modal" style="max-width:380px">
+            <div class="modal-header">
+                <div class="modal-icon" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.25);color:var(--err)">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="modal-title-wrap">
+                    <div class="modal-title" id="conf-t">Confirm Delete</div>
+                </div>
+            </div>
+            <div class="conf-body">
+                <p id="conf-d"></p>
+            </div>
+            <div class="modal-footer" id="conf-acts"></div>
+        </div>
+    </div>
+
+    <!-- ═══ POPUP GUIDE MODAL ═══ -->
+    <div class="modal-backdrop" id="popup-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.25);color:var(--warn)">
+                    <i class="fa-solid fa-window-restore"></i>
+                </div>
+                <div class="modal-title-wrap">
+                    <div class="modal-title">Allow Popups to Restore</div>
+                    <div class="modal-desc">Your browser blocked multiple tabs from opening.</div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="popup-steps">
+                    <div class="popup-step">
+                        <div class="step-num">1</div>
+                        <div class="step-text">Look for a <strong>popup blocked</strong> icon in the address bar (top right of browser).</div>
+                    </div>
+                    <div class="popup-step">
+                        <div class="step-num">2</div>
+                        <div class="step-text">Click it and choose <strong>"Always allow popups from this site"</strong>.</div>
+                    </div>
+                    <div class="popup-step">
+                        <div class="step-num">3</div>
+                        <div class="step-text">Click <strong>Restore All</strong> again — all tabs will open in sequence.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-p" onclick="closePopupModal()">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TOASTS ═══ -->
+    <div id="toasts"></div>
+
+    <!-- ═══ JS — loaded in dependency order ═══ -->
+    <script src="js/constants.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/detail.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

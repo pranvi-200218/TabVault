@@ -1,2 +1,19 @@
-const ICONS = ['📁', '🔬', '✈️', '💻', '🎨', '📚', '🎯', '🛠️', '🌐', '📊', '🎵', '🏠', '💼', '🔗', '⚡', '🧪'];
+const ICONS = [
+    '<i class="fa-solid fa-folder"></i>',
+    '<i class="fa-solid fa-flask"></i>',
+    '<i class="fa-solid fa-plane"></i>',
+    '<i class="fa-solid fa-laptop-code"></i>',
+    '<i class="fa-solid fa-palette"></i>',
+    '<i class="fa-solid fa-book-open"></i>',
+    '<i class="fa-solid fa-bullseye"></i>',
+    '<i class="fa-solid fa-screwdriver-wrench"></i>',
+    '<i class="fa-solid fa-globe"></i>',
+    '<i class="fa-solid fa-chart-bar"></i>',
+    '<i class="fa-solid fa-music"></i>',
+    '<i class="fa-solid fa-house"></i>',
+    '<i class="fa-solid fa-briefcase"></i>',
+    '<i class="fa-solid fa-link"></i>',
+    '<i class="fa-solid fa-bolt"></i>',
+    '<i class="fa-solid fa-atom"></i>'
+];
 const TICO = { ok: 'fa-circle-check', err: 'fa-circle-xmark', warn: 'fa-triangle-exclamation', info: 'fa-circle-info' };
