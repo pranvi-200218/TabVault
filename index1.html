@@ -17,23 +17,270 @@
 
     <!-- ═══ LANDING ═══ -->
     <div id="landing">
-        <div class="land-logo">
-            <span class="land-logo-icon"><i class="fa-solid fa-vault" style="color:#0ea5a0"></i></span> TabVault
+        <!-- Animated background orbs -->
+        <div class="land-orb land-orb-1"></div>
+        <div class="land-orb land-orb-2"></div>
+        <div class="land-orb land-orb-3"></div>
+        <!-- Grid overlay -->
+        <div class="land-grid"></div>
+
+        <!-- Floating tab previews -->
+        <div class="land-tab-preview land-tp-1">
+            <span class="ltp-dot" style="background:#c0635a"></span>
+            <span class="ltp-dot" style="background:#d4955a"></span>
+            <span class="ltp-dot" style="background:#5a9e7c"></span>
+            <span class="ltp-url">github.com/dashboard</span>
         </div>
-        <div class="land-sub">Your browser sessions, beautifully organized.</div>
-        <div class="land-badge">
-            <span class="land-feature"><i class="fa-solid fa-bolt" style="color:#f59e0b"></i> Instant restore</span>
-            <span class="land-feature"><i class="fa-solid fa-layer-group" style="color:#0ea5a0"></i> Tab groups</span>
-            <span class="land-feature"><i class="fa-solid fa-shield-halved" style="color:#10b981"></i> Local only</span>
+        <div class="land-tab-preview land-tp-2">
+            <span class="ltp-dot" style="background:#c0635a"></span>
+            <span class="ltp-dot" style="background:#d4955a"></span>
+            <span class="ltp-dot" style="background:#5a9e7c"></span>
+            <span class="ltp-url">figma.com/files</span>
         </div>
-        <button class="btn btn-p land-btn" onclick="launch()">
-    <i class="fa-solid fa-arrow-right-to-bracket"></i>
-    Open Vault
-  </button>
-        <div style="margin-top:28px;font-family:var(--font-mono);font-size:10px;letter-spacing:1px;color:var(--text4);animation:fadeSlideUp 0.7s 0.45s cubic-bezier(0.4,0,0.2,1) both">
-            v5 · LOCAL STORAGE · NO ACCOUNT NEEDED
+        <div class="land-tab-preview land-tp-3">
+            <span class="ltp-dot" style="background:#c0635a"></span>
+            <span class="ltp-dot" style="background:#d4955a"></span>
+            <span class="ltp-dot" style="background:#5a9e7c"></span>
+            <span class="ltp-url">notion.so/workspace</span>
+        </div>
+
+        <!-- Main content -->
+        <div class="land-content">
+            <!-- Eyebrow tag -->
+            <div class="land-eyebrow">
+                <span class="land-eyebrow-dot"></span> Session Manager · v5
+            </div>
+
+            <!-- Logo -->
+            <div class="land-logo">
+                <div class="land-logo-icon">
+                    <i class="fa-solid fa-vault"></i>
+                    <div class="land-logo-ring"></div>
+                </div>
+                <span class="land-logo-text">TabVault</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="land-headline">
+                Your browser sessions,<br>
+                <span class="land-headline-accent">beautifully organized.</span>
+            </h1>
+
+            <!-- Features row -->
+            <div class="land-pills">
+                <div class="land-pill">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Instant restore</span>
+                </div>
+                <div class="land-pill-sep"></div>
+                <div class="land-pill">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Tab groups</span>
+                </div>
+                <div class="land-pill-sep"></div>
+                <div class="land-pill">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>100% local</span>
+                </div>
+                <div class="land-pill-sep"></div>
+                <div class="land-pill">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Instant search</span>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="land-ctas">
+                <button class="btn btn-p land-cta-primary" onclick="launch()">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    Open Vault
+                </button>
+                <button class="land-cta-ghost" onclick="showHomepageContent()">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Learn More
+                    <i class="fa-solid fa-chevron-right land-ghost-arrow"></i>
+                </button>
+            </div>
+
+            <!-- Trust line -->
+            <div class="land-trust">
+                <span class="land-trust-item"><i class="fa-solid fa-lock"></i> No account required</span>
+                <span class="land-trust-dot">·</span>
+                <span class="land-trust-item"><i class="fa-solid fa-database"></i> Data stays on your device</span>
+                <span class="land-trust-dot">·</span>
+                <span class="land-trust-item"><i class="fa-solid fa-code"></i> Free forever</span>
+            </div>
         </div>
     </div>
+
+
+    <!-- ═══ HOMEPAGE CONTENT (Features + Guide) ═══ -->
+    <div id="landing-content">
+
+        <!-- Top bar -->
+        <div class="lc-topbar">
+            <div class="lc-logo" onclick="hideHomepageContent()">
+                <span class="lc-logo-icon"><i class="fa-solid fa-vault" style="color:#5a9e7c"></i></span> TabVault
+            </div>
+            <div class="lc-actions">
+                <button class="btn btn-s" onclick="hideHomepageContent()" style="padding:7px 16px;font-size:13px">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                </button>
+                <button class="btn btn-p" onclick="launch()" style="padding:7px 16px;font-size:13px">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Open Vault
+                </button>
+            </div>
+        </div>
+
+        <!-- ── FEATURES SECTION ── -->
+        <div class="features-section">
+            <div class="features-heading">Everything you need to manage tabs</div>
+            <div class="features-sub">TabVault stores your browser sessions locally — no account, no sync, no fuss. Here's what it can do.</div>
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-floppy-disk"></i></div>
+                    <div class="feature-card-title">Save Sessions</div>
+                    <div class="feature-card-desc">Capture any set of URLs as a named session. Group them by topic, project, or workflow — and retrieve them any time.</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+                    <div class="feature-card-title">One-Click Restore</div>
+                    <div class="feature-card-desc">Reopen all tabs in a session with a single click. Restore the entire session or individual groups as needed.</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <div class="feature-card-title">Tab Groups</div>
+                    <div class="feature-card-desc">Organise tabs within a session into named groups — like "Research", "Reference", or "Tools" — for a cleaner view.</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-bookmark"></i></div>
+                    <div class="feature-card-title">Library &amp; Workspaces</div>
+                    <div class="feature-card-desc">Browse all your saved sessions in the Library, or use Workspaces to keep project-specific sessions separate.</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-box-archive"></i></div>
+                    <div class="feature-card-title">Archive &amp; Trash</div>
+                    <div class="feature-card-desc">Archive sessions you rarely use without deleting them, or send them to Trash for a safe two-step removal.</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="feature-card-title">100% Local</div>
+                    <div class="feature-card-desc">All data is stored in your browser's local storage. Nothing is ever sent to a server. Your sessions stay private.</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="feature-card-title">Instant Search</div>
+                    <div class="feature-card-desc">Find any saved session by name or URL using the built-in search bar available in every view.</div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card-icon"><i class="fa-solid fa-sun"></i></div>
+                    <div class="feature-card-title">Dark &amp; Light Mode</div>
+                    <div class="feature-card-desc">Switch between a warm dark theme and a calm light theme with a single click — comfortable in any lighting.</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <!-- ── GUIDE SECTION ── -->
+        <div class="guide-section">
+            <div class="guide-heading">How to use TabVault</div>
+            <div class="guide-sub">Follow these steps to save, organise, and restore your browser sessions in seconds.</div>
+
+            <div class="guide-steps" id="guide-steps">
+
+                <div class="guide-step active" onclick="toggleGuideStep(this)">
+                    <div class="guide-step-num">1</div>
+                    <div class="guide-step-content">
+                        <div class="guide-step-title">Open the Vault</div>
+                        <div class="guide-step-body">
+                            Click <strong>Open Vault</strong> on the landing screen to enter the main app. You'll land in the <strong>Library</strong> view, which shows all your saved sessions. On your very first visit it will be empty — that's fine!
+                            <div><span class="guide-step-tag"><i class="fa-solid fa-info-circle"></i> No login required</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-step" onclick="toggleGuideStep(this)">
+                    <div class="guide-step-num">2</div>
+                    <div class="guide-step-content">
+                        <div class="guide-step-title">Create a New Session</div>
+                        <div class="guide-step-body">
+                            Click <strong>+ New Session</strong> in the top-right corner. A dialog will open where you can give the session a name (e.g. "Work Research"), pick an icon, add a group label, and paste the URLs you want to save — one per line.
+                            <div><span class="guide-step-tag"><i class="fa-solid fa-lightbulb"></i> Tip: paste from your browser's address bar</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-step" onclick="toggleGuideStep(this)">
+                    <div class="guide-step-num">3</div>
+                    <div class="guide-step-content">
+                        <div class="guide-step-title">Organise with Tab Groups</div>
+                        <div class="guide-step-body">
+                            Open any session by clicking its card. In the detail panel on the right, use <strong>+ Add Group</strong> to create named groups inside the session. Drag tabs between groups to keep related links together — great for large
+                            projects.
+                            <div><span class="guide-step-tag"><i class="fa-solid fa-layer-group"></i> Unlimited groups per session</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-step" onclick="toggleGuideStep(this)">
+                    <div class="guide-step-num">4</div>
+                    <div class="guide-step-content">
+                        <div class="guide-step-title">Restore Tabs</div>
+                        <div class="guide-step-body">
+                            Hit <strong>Restore All</strong> in the detail panel to reopen every tab in the session at once. Or use the per-group restore button to open only that group. If your browser blocks pop-ups, a guide will appear to help you allow
+                            them.
+                            <div><span class="guide-step-tag"><i class="fa-solid fa-arrow-up-right-from-square"></i> Works in Chrome, Firefox, Edge</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-step" onclick="toggleGuideStep(this)">
+                    <div class="guide-step-num">5</div>
+                    <div class="guide-step-content">
+                        <div class="guide-step-title">Archive or Delete Sessions</div>
+                        <div class="guide-step-body">
+                            Hover over any session card to reveal action buttons. Use the <strong>archive icon</strong> to move a session out of your main Library without deleting it, or the <strong>trash icon</strong> to move it to Trash. You can restore
+                            archived sessions or permanently empty the Trash from the sidebar.
+                            <div><span class="guide-step-tag"><i class="fa-solid fa-box-archive"></i> Safe two-step deletion</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="guide-step" onclick="toggleGuideStep(this)">
+                    <div class="guide-step-num">6</div>
+                    <div class="guide-step-content">
+                        <div class="guide-step-title">Search &amp; Switch Views</div>
+                        <div class="guide-step-body">
+                            Use the <strong>search bar</strong> at the top of any view to filter sessions by name. Switch between <strong>Library</strong> and <strong>Workspaces</strong> using the tabs in the header. The sidebar also shows recently accessed
+                            sessions for quick access.
+                            <div><span class="guide-step-tag"><i class="fa-solid fa-magnifying-glass"></i> Searches names and URLs</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="guide-cta">
+                <button class="btn btn-p" onclick="launch()" style="padding:11px 28px;font-size:14px">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Open Vault Now
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <!-- /#landing-content -->
+
 
     <!-- ═══ APP ═══ -->
     <div id="app">
@@ -41,17 +288,17 @@
         <!-- TOP BAR -->
         <div class="top-bar">
             <span class="top-logo" onclick="goHome()">
-      <span class="top-logo-icon"><i class="fa-solid fa-vault"></i></span> TabVault
+                <span class="top-logo-icon"><i class="fa-solid fa-vault"></i></span> TabVault
             </span>
             <div class="top-divider"></div>
 
             <div class="top-tabs">
                 <button class="top-tab active" data-view="library" onclick="switchView('library', this)">
-        <i class="fa-solid fa-bookmark" style="margin-right:5px;font-size:11px"></i>Library
-      </button>
+                    <i class="fa-solid fa-bookmark" style="margin-right:5px;font-size:11px"></i>Library
+                </button>
                 <button class="top-tab" data-view="workspaces" onclick="switchView('workspaces', this)">
-        <i class="fa-solid fa-layer-group" style="margin-right:5px;font-size:11px"></i>Workspaces
-      </button>
+                    <i class="fa-solid fa-layer-group" style="margin-right:5px;font-size:11px"></i>Workspaces
+                </button>
             </div>
 
             <div class="top-spacer"></div>
@@ -61,8 +308,8 @@
                 <button class="icon-btn" onclick="zoomIn()" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
                 <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle Theme"><i class="fa-solid fa-sun"></i></button>
                 <button class="btn btn-p" onclick="openAddModal()" style="padding:7px 16px;font-size:13px">
-        <i class="fa-solid fa-plus"></i> New Session
-      </button>
+                    <i class="fa-solid fa-plus"></i> New Session
+                </button>
             </div>
         </div>
 
@@ -115,9 +362,9 @@
                     </div>
                     <div class="lib-toolbar">
                         <button class="btn-sort" onclick="toggleSort()">
-            <i class="fa-solid fa-arrow-down-wide-short"></i>
-            <span id="sort-lbl">Recent</span>
-          </button>
+                            <i class="fa-solid fa-arrow-down-wide-short"></i>
+                            <span id="sort-lbl">Recent</span>
+                        </button>
                     </div>
                     <div class="lib-grid" id="lib-grid"></div>
                 </div>
@@ -128,8 +375,8 @@
                         <div class="view-title">Workspaces</div>
                         <div class="view-spacer"></div>
                         <button class="btn btn-p" onclick="openAddModal()" style="padding:7px 16px;font-size:13px">
-            <i class="fa-solid fa-plus"></i> New
-          </button>
+                            <i class="fa-solid fa-plus"></i> New
+                        </button>
                     </div>
                     <div class="lib-grid" id="ws-grid"></div>
                 </div>
@@ -167,8 +414,8 @@
                         <i class="fa-solid fa-triangle-exclamation"></i>
                         <span>Items in trash are not backed up. Empty trash to free storage.</span>
                         <button class="btn btn-d" style="padding:6px 14px;font-size:12px" onclick="emptyTrash()">
-            <i class="fa-solid fa-trash"></i> Empty Trash
-          </button>
+                            <i class="fa-solid fa-trash"></i> Empty Trash
+                        </button>
                     </div>
                     <div class="lib-grid" id="trs-grid"></div>
                 </div>
@@ -187,16 +434,16 @@
                     <div id="dp-meta"></div>
                 </div>
                 <button class="dp-close" onclick="closeDetail()" title="Close">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
             <div class="dp-header-acts">
                 <button class="btn btn-s" style="padding:6px 14px;font-size:12px" onclick="addGroupToCurrentDetail()">
-        <i class="fa-solid fa-plus"></i> Add Group
-      </button>
+                    <i class="fa-solid fa-plus"></i> Add Group
+                </button>
                 <button class="btn btn-p" style="padding:6px 14px;font-size:12px" onclick="openAllTabs(activeDpId, detailBucket)">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> Restore All
-      </button>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Restore All
+                </button>
             </div>
         </div>
         <div id="dp-body"></div>
@@ -233,9 +480,9 @@
             <div class="modal-footer">
                 <button class="btn btn-s" onclick="closeAddModal()">Cancel</button>
                 <button class="btn btn-p" onclick="saveSessionModal()">
-        <i class="fa-solid fa-floppy-disk"></i>
-        <span id="modal-save-lbl">Save Session</span>
-      </button>
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span id="modal-save-lbl">Save Session</span>
+                </button>
             </div>
         </div>
     </div>
@@ -244,7 +491,7 @@
     <div class="modal-backdrop" id="dup-modal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-icon" style="background:rgba(245,158,11,0.12);border-color:rgba(245,158,11,0.25);color:var(--warn)">
+                <div class="modal-icon" style="background:rgba(212,149,90,0.12);border-color:rgba(212,149,90,0.25);color:var(--warn)">
                     <i class="fa-solid fa-copy"></i>
                 </div>
                 <div class="modal-title-wrap">
@@ -265,7 +512,7 @@
     <div class="modal-backdrop" id="conf-modal">
         <div class="modal" style="max-width:380px">
             <div class="modal-header">
-                <div class="modal-icon" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.25);color:var(--err)">
+                <div class="modal-icon" style="background:rgba(192,99,90,0.1);border-color:rgba(192,99,90,0.25);color:var(--err)">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
                 <div class="modal-title-wrap">
@@ -283,7 +530,7 @@
     <div class="modal-backdrop" id="popup-modal">
         <div class="modal">
             <div class="modal-header">
-                <div class="modal-icon" style="background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.25);color:var(--warn)">
+                <div class="modal-icon" style="background:rgba(212,149,90,0.1);border-color:rgba(212,149,90,0.25);color:var(--warn)">
                     <i class="fa-solid fa-window-restore"></i>
                 </div>
                 <div class="modal-title-wrap">
@@ -327,6 +574,34 @@
     <script src="js/modals.js"></script>
     <script src="js/detail.js"></script>
     <script src="js/app.js"></script>
+
+    <!-- ═══ HOMEPAGE CONTENT TOGGLE ═══ -->
+    <script>
+        function showHomepageContent() {
+            document.getElementById('landing').classList.add('out');
+            setTimeout(function() {
+                document.getElementById('landing').style.display = 'none';
+                document.getElementById('landing-content').classList.add('show');
+            }, 460);
+        }
+
+        function hideHomepageContent() {
+            document.getElementById('landing-content').classList.remove('show');
+            document.getElementById('landing').style.display = '';
+            setTimeout(function() {
+                document.getElementById('landing').classList.remove('out');
+            }, 20);
+        }
+
+        function toggleGuideStep(el) {
+            const steps = document.querySelectorAll('.guide-step');
+            const isActive = el.classList.contains('active');
+            steps.forEach(function(s) {
+                s.classList.remove('active');
+            });
+            if (!isActive) el.classList.add('active');
+        }
+    </script>
 </body>
 
 </html>
