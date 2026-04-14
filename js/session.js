@@ -114,25 +114,11 @@ function emptyTrash() {
     });
 }
 
-/* ── SHARE ── */
-// function shareSession(id) {
-//     const store = detailBucket === 'archived' ? DB.archived : detailBucket === 'trash' ? DB.trash : DB.sessions;
-//     const s = store[id] || DB.sessions[id];
-//     if (!s) return;
-//     const tabs = allTabs(s);
-//     const lines = [`📁 *${s.name}*`, `_${tabs.length} saved tabs_`, ''];
-//     Object.values(s.groups).forEach(g => {
-//         lines.push(`*${g.name}:*`);
-//         g.tabs.forEach(t => lines.push(`• ${t.url}`));
-//         lines.push('');
-//     });
-//     window.open(`https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`, '_blank');
-// }
 function shareSession(id) {
     const store = detailBucket === 'archived' ? DB.archived : detailBucket === 'trash' ? DB.trash : DB.sessions;
     const s = store[id] || DB.sessions[id];
     if (!s) return;
 
-    const waUrl = `https://wa.me/?text=${encodeURIComponent('https://your-app.vercel.app')}`;
+    const waUrl = `https://wa.me/?text=${encodeURIComponent('https://tabvault-silk.vercel.app/')}`;
     window.open(waUrl, '_blank');
 }
